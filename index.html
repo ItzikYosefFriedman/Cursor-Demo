@@ -42,7 +42,7 @@
   </style>
 </head>
 <body>
-  <h1>Snake</h1>
+  <h1 id="title">Snake</h1>
   <div id="hud">
     <span>Score: <span id="score">0</span></span>
     <span>Best: <span id="best">0</span></span>
@@ -58,6 +58,8 @@
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
     const cell = canvas.width / COLS;
+    document.getElementById("title").textContent =
+      `Snake ${canvas.width}×${canvas.height}`;
 
     const scoreEl = document.getElementById("score");
     const bestEl = document.getElementById("best");
