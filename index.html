@@ -79,6 +79,13 @@
       return snake.some((seg) => same(seg, pos));
     }
 
+    function randomFoodColor() {
+      const h = Math.floor(Math.random() * 360);
+      const s = 70 + Math.floor(Math.random() * 30);
+      const l = 45 + Math.floor(Math.random() * 25);
+      return `hsl(${h} ${s}% ${l}%)`;
+    }
+
     function placeFood() {
       const empty = [];
       for (let y = 0; y < ROWS; y++) {
@@ -86,7 +93,8 @@
           if (!occupied({ x, y })) empty.push({ x, y });
         }
       }
-      food = empty[Math.floor(Math.random() * empty.length)] || null;
+      const spot = empty[Math.floor(Math.random() * empty.length)];
+      food = spot ? { x: spot.x, y: spot.y, color: randomFoodColor() } : null;
     }
 
     function reset() {
@@ -146,10 +154,7 @@
       }
 
       if (food) {
-        const h = Math.floor(Math.random() * 360);
-        const s = 70 + Math.floor(Math.random() * 30);
-        const l = 45 + Math.floor(Math.random() * 25);
-        ctx.fillStyle = `hsl(${h} ${s}% ${l}%)`;
+        ctx.fillStyle = food.color;
         ctx.fillRect(food.x * cell + 6, food.y * cell + 6, cell - 13, cell - 13);
       }
 
