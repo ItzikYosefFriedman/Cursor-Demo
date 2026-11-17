@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+#hud {
+  width: var(--board-size, 800px);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+#game {
+  --board-size: 800px;
+  --cols: 20;
+  --rows: 20;
+
+  position: relative;
+  width: var(--board-size);
+  height: var(--board-size);
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  background: #000;
+  border: 2px solid #fff;
+}
+
+.cell {
+  background: #000;
+}
+
+.cell.snake {
+  background: #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.cell.food {
+  position: relative;
+}
+
+.cell.food::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  background: var(--food-color);
+}
+
+.game-over {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-content: center;
+  gap: 10px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.is-dead .game-over {
+  display: grid;
+}
+
+.game-over-title {
+  font-size: 36px;
+}
+
+.game-over-hint {
+  font-size: 18px;
+}
+
+#hint {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
